@@ -5,7 +5,20 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  name: "List"
+  name: "List",
+  computed: mapGetters({
+    lists: "getLists"
+  }),
+  created() {
+    this.fetchLists();
+  },
+  methods: {
+    fetchLists() {
+      this.$store.dispatch("fetchLists");
+    }
+  }
 };
 </script>
