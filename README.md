@@ -1,4 +1,4 @@
-# list_app_2
+# list_app
 
 ## Project setup
 ```
