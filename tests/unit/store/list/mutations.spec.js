@@ -1,7 +1,7 @@
 import mutations from "@/store/modules/mutations/list";
 
 // destructure assign `mutations`
-describe("setList", () => {
+describe("setLists", () => {
   it("adds a list to the state", () => {
     const list = {
       id: 1,
