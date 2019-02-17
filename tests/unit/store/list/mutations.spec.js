@@ -37,3 +37,18 @@ describe("removeList", () => {
     expect(state).toEqual({ lists: [] });
   });
 });
+
+describe("updateList", () => {
+  it("adds a list to the state", () => {
+    const state = {
+      lists: [list]
+    };
+
+    let listUpdated = list;
+    listUpdated.items = [];
+
+    mutations.updateList(state, list);
+
+    expect(state).toEqual({ lists: [listUpdated] });
+  });
+});

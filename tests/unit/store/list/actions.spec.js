@@ -24,19 +24,49 @@ describe("fetchLists", () => {
   });
 });
 
-describe("destroyLists", () => {
+describe("destroyList", () => {
   beforeEach(() => {
     mockAxios.delete.mockImplementationOnce(() =>
       Promise.resolve({ data: list })
     );
   });
 
-  it("fetch lists", async () => {
+  it("destroy a list", async () => {
     const commit = jest.fn();
 
     await actions.destroyList({ commit }, list.id);
 
     expect(mockAxios.delete).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("removeList", list);
+  });
+});
+
+describe("destroyItem", () => {
+  const savedlist = {
+    id: 1,
+    name: "test",
+    items: [
+      {
+        id: 1,
+        title: "test"
+      }
+    ]
+  };
+
+  beforeEach(() => {
+    mockAxios.put.mockImplementationOnce(() => Promise.resolve({ data: list }));
+  });
+
+  it("destroy a an item inside a list", async () => {
+    const commit = jest.fn();
+    const params = {
+      id: savedlist.id,
+      listId: savedlist.items[0].id
+    };
+
+    await actions.destroyItem({ commit }, params);
+
+    expect(mockAxios.put).toHaveBeenCalledTimes(1);
+    expect(commit).toHaveBeenCalledWith("updateList", list);
   });
 });

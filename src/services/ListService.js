@@ -16,6 +16,18 @@ export default {
   destroy(id) {
     return Api().delete("/lists/" + id);
   },
+  destroyItem(id, listId) {
+    const params = {
+      items_attributes: [
+        {
+          id: listId,
+          _destroy: true
+        }
+      ]
+    };
+
+    return Api().put("/lists/" + id, params);
+  },
   delete(id) {
     return Api().delete("/lists/delete/" + id);
   }
