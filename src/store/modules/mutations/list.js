@@ -7,8 +7,8 @@ export default {
       return list.id !== data.id;
     });
   },
-  updateList(state, data) {
+  updateListItems(state, data) {
     let index = state.lists.findIndex(list => list.id == data.id);
-    state.lists[index] = data;
+    state.lists[index].items = data.items;
   }
 };

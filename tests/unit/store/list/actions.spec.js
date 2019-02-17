@@ -67,6 +67,6 @@ describe("destroyItem", () => {
     await actions.destroyItem({ commit }, params);
 
     expect(mockAxios.put).toHaveBeenCalledTimes(1);
-    expect(commit).toHaveBeenCalledWith("updateList", list);
+    expect(commit).toHaveBeenCalledWith("updateListItems", list);
   });
 });

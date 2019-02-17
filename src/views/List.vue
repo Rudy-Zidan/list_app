@@ -20,7 +20,12 @@
 
         <v-list-tile v-for="(item, j) in list.items" :key="j">
           <v-list-tile-action>
-            <v-btn round flat color="red">Destroy</v-btn>
+            <v-btn
+            round
+            flat
+            color="red"
+            @click="destroyItem(list.id, item.id)"
+            >Destroy</v-btn>
           </v-list-tile-action>
           <v-list-tile-content class="ml-2">
             <v-list-tile-title>
@@ -54,6 +59,9 @@ export default {
     },
     destroyList(id) {
       this.$store.dispatch("destroyList", id);
+    },
+    destroyItem(id, itemId) {
+      this.$store.dispatch("destroyItem", { id: id, itemId: itemId });
     }
   }
 };

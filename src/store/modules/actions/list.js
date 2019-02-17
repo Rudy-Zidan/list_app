@@ -13,7 +13,7 @@ export default {
   },
   async destroyItem({ commit }, params) {
     ListService.destroyItem(params.id, params.itemId).then(res => {
-      commit("updateList", res.data);
+      commit("updateListItems", res.data);
     });
   }
 };
