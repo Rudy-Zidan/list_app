@@ -1,15 +1,10 @@
 <template>
   <v-card height="200px" flat>
     <div class="headline text-xs-center pa-5">
-      <lists v-if="bottomNav === 'lists'"></lists>
-      <p v-else>Active: {{ bottomNav }}</p>
+      <lists v-if="bottomNav === 'lists'" class="mb-5"></lists>
+      <items v-else class="mb-5"></items>
     </div>
-    <v-bottom-nav
-      :active.sync="bottomNav"
-      :value="true"
-      fixed
-      color="transparent"
-    >
+    <v-bottom-nav :active.sync="bottomNav" :value="true" fixed>
       <v-btn color="blue" flat value="lists">
         <span>Lists</span>
         <v-icon>list</v-icon>
@@ -26,11 +21,13 @@
 <script>
 import { mapGetters } from "vuex";
 import Lists from "@/components/trash/List";
+import Items from "@/components/trash/Item";
 
 export default {
   name: "Trash",
   components: {
-    Lists
+    Lists,
+    Items
   },
   data() {
     return {
