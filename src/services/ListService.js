@@ -35,6 +35,6 @@ export default {
     return Api().put("/lists/" + id, params);
   },
   delete(id) {
-    return Api().delete("/lists/delete/" + id);
+    return Api().delete("/lists/" + id + "/delete/");
   }
 };

@@ -98,7 +98,7 @@ describe("destroyItem", () => {
 describe("deleteList", () => {
   beforeEach(() => {
     mockAxios.delete.mockImplementationOnce(() =>
-      Promise.resolve({ data: listInTrash })
+      Promise.resolve({ data: listInTrash, status: 200 })
     );
   });
 
@@ -108,6 +108,6 @@ describe("deleteList", () => {
     await actions.deleteList({ commit }, listInTrash.id);
 
     expect(mockAxios.delete).toHaveBeenCalledTimes(2);
-    expect(commit).toHaveBeenCalledWith("removeListInTrash", listInTrash);
+    expect(commit).toHaveBeenCalledWith("removeListInTrash", listInTrash.id);
   });
 });

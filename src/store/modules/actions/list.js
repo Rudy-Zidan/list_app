@@ -28,7 +28,9 @@ export default {
   },
   async deleteList({ commit }, id) {
     ListService.delete(id).then(res => {
-      commit("removeListInTrash", res.data);
+      if (res.status === 200) {
+        commit("removeListInTrash", id);
+      }
     });
   }
 };

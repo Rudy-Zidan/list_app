@@ -46,8 +46,8 @@ export default {
     fetchListsInTrash() {
       this.$store.dispatch("fetchListsInTrash");
     },
-    deleteList() {
-      this.$store.dispatch("deleteList");
+    deleteList(id) {
+      this.$store.dispatch("deleteList", id);
     }
   }
 };

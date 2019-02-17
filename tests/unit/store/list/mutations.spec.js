@@ -86,7 +86,7 @@ describe("removeListInTrash", () => {
       listsInTrash: [listsInTrash]
     };
 
-    mutations.removeListInTrash(state, listsInTrash);
+    mutations.removeListInTrash(state, listsInTrash.id);
 
     expect(state).toEqual({ listsInTrash: [] });
   });
