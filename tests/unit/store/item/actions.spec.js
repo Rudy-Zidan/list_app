@@ -28,3 +28,20 @@ describe("fetchItemsInTrash", () => {
     expect(commit).toHaveBeenCalledWith("setItemsInTrash", [itemInTrash]);
   });
 });
+
+describe("deleteItem", () => {
+  beforeEach(() => {
+    mockAxios.delete.mockImplementationOnce(() =>
+      Promise.resolve({ data: itemInTrash, status: 200 })
+    );
+  });
+
+  it("delete an item", async () => {
+    const commit = jest.fn();
+
+    await actions.deleteItem({ commit }, itemInTrash.id);
+
+    expect(mockAxios.delete).toHaveBeenCalledTimes(1);
+    expect(commit).toHaveBeenCalledWith("removeItemInTrash", itemInTrash.id);
+  });
+});

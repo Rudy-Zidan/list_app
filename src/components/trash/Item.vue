@@ -3,7 +3,7 @@
     <v-list v-if="items.length > 0" three-line>
       <v-list-tile v-for="item in items" :key="item.id" @click="">
         <v-list-tile-action>
-          <v-btn round flat color="red" class="item-destroy" @click=""
+          <v-btn round flat color="red" class="item-destroy" @click="deleteItem(item.id)"
             >Delete</v-btn
           >
         </v-list-tile-action>
@@ -37,7 +37,10 @@ export default {
   methods: {
     fetchItemsInTrash() {
       this.$store.dispatch("fetchItemsInTrash");
-    }
+    },
+    deleteItem(id) {
+      this.$store.dispatch("deleteItem", id);
+    },
   }
 };
 </script>

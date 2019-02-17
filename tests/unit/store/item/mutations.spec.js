@@ -24,3 +24,15 @@ describe("setItemsInTrash", () => {
     });
   });
 });
+
+describe("removeItemInTrash", () => {
+  it("remove an item", () => {
+    const state = {
+      itemsInTrash: [itemInTrash]
+    };
+
+    mutations.removeItemInTrash(state, itemInTrash.id);
+
+    expect(state).toEqual({ itemsInTrash: [] });
+  });
+});

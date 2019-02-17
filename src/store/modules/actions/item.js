@@ -5,5 +5,12 @@ export default {
     ItemService.trash().then(res => {
       commit("setItemsInTrash", res.data);
     });
+  },
+  async deleteItem({ commit }, id) {
+    ItemService.delete(id).then(res => {
+      if (res.status === 200) {
+        commit("removeItemInTrash", id);
+      }
+    });
   }
 };
