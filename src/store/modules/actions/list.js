@@ -6,6 +6,16 @@ export default {
       commit("setLists", res.data);
     });
   },
+  async fetchListsInTrash({ commit }) {
+    ListService.trash().then(res => {
+      commit("setListsInTrash", res.data);
+    });
+  },
+  async restoreList({ commit }, id) {
+    ListService.restore(id).then(res => {
+      commit("restoreList", res.data);
+    });
+  },
   async destroyList({ commit }, id) {
     ListService.destroy(id).then(res => {
       commit("removeList", res.data);

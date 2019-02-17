@@ -7,6 +7,13 @@ const list = {
   items: []
 };
 
+const listInTrash = {
+  id: 1,
+  name: "test",
+  items: [],
+  deleted_at: Date.now()
+};
+
 describe("fetchLists", () => {
   beforeEach(() => {
     mockAxios.get.mockImplementationOnce(() =>
@@ -21,6 +28,23 @@ describe("fetchLists", () => {
 
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("setLists", [list]);
+  });
+});
+
+describe("fetchListsInTrash", () => {
+  beforeEach(() => {
+    mockAxios.get.mockImplementationOnce(() =>
+      Promise.resolve({ data: [listInTrash] })
+    );
+  });
+
+  it("fetch lists in trash", async () => {
+    const commit = jest.fn();
+
+    await actions.fetchListsInTrash({ commit });
+
+    expect(mockAxios.get).toHaveBeenCalledTimes(2);
+    expect(commit).toHaveBeenCalledWith("setListsInTrash", [listInTrash]);
   });
 });
 

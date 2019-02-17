@@ -12,6 +12,19 @@ const list = {
   ]
 };
 
+const listsInTrash = {
+  id: 1,
+  name: "Test",
+  items: [
+    {
+      id: 1,
+      title: "Test",
+      description: "This is a test"
+    }
+  ],
+  deleted_at: Date.now()
+};
+
 describe("setLists", () => {
   it("adds a list to the state", () => {
     const state = {
@@ -22,6 +35,20 @@ describe("setLists", () => {
 
     expect(state).toEqual({
       lists: { list: list }
+    });
+  });
+});
+
+describe("setListsInTrash", () => {
+  it("adds a list to the state", () => {
+    const state = {
+      listsInTrash: []
+    };
+
+    mutations.setListsInTrash(state, { listsInTrash });
+
+    expect(state).toEqual({
+      listsInTrash: { listsInTrash: listsInTrash }
     });
   });
 });

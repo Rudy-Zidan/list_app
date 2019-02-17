@@ -4,6 +4,9 @@ export default {
   all() {
     return Api().get("/lists");
   },
+  trash() {
+    return Api().get("/lists/trash");
+  },
   list(id) {
     return Api().get("/lists/" + id);
   },
@@ -12,6 +15,9 @@ export default {
   },
   update(id, params) {
     return Api().put("/lists/" + id, params);
+  },
+  restore(id) {
+    return Api().put("/lists/restore" + id);
   },
   destroy(id) {
     return Api().delete("/lists/" + id);
