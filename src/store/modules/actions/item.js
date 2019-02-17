@@ -12,5 +12,10 @@ export default {
         commit("removeItemInTrash", id);
       }
     });
+  },
+  async restoreItem({ commit }, id) {
+    ItemService.restore(id).then(res => {
+      commit("restoreItem", res.data);
+    });
   }
 };

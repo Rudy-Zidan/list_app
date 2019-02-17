@@ -6,5 +6,10 @@ export default {
     state.itemsInTrash = state.itemsInTrash.filter(item => {
       return item.id !== id;
     });
+  },
+  restoreItem(state, data) {
+    state.itemsInTrash = state.itemsInTrash.filter(item => {
+      return item.id !== data.id;
+    });
   }
 };

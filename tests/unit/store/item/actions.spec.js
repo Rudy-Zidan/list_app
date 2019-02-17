@@ -45,3 +45,20 @@ describe("deleteItem", () => {
     expect(commit).toHaveBeenCalledWith("removeItemInTrash", itemInTrash.id);
   });
 });
+
+describe("restoreItem", () => {
+  beforeEach(() => {
+    mockAxios.put.mockImplementationOnce(() =>
+      Promise.resolve({ data: itemInTrash })
+    );
+  });
+
+  it("restore an item", async () => {
+    const commit = jest.fn();
+
+    await actions.restoreItem({ commit }, itemInTrash.id);
+
+    expect(mockAxios.put).toHaveBeenCalledTimes(1);
+    expect(commit).toHaveBeenCalledWith("restoreItem", itemInTrash);
+  });
+});

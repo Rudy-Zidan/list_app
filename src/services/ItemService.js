@@ -6,5 +6,8 @@ export default {
   },
   delete(id) {
     return Api().delete("/items/" + id + "/delete/");
+  },
+  restore(id) {
+    return Api().put("/items/" + id + "/restore");
   }
 };

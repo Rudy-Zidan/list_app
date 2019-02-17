@@ -3,7 +3,12 @@
     <v-list v-if="items.length > 0" three-line>
       <v-list-tile v-for="item in items" :key="item.id" @click="">
         <v-list-tile-action>
-          <v-btn round flat color="red" class="item-destroy" @click="deleteItem(item.id)"
+          <v-btn
+            round
+            flat
+            color="red"
+            class="item-destroy"
+            @click="deleteItem(item.id)"
             >Delete</v-btn
           >
         </v-list-tile-action>
@@ -13,7 +18,12 @@
           <v-list-tile-title v-text="item.description"></v-list-tile-title>
         </v-list-tile-content>
         <v-list-tile-action>
-          <v-btn round flat color="green" class="item-destroy" @click=""
+          <v-btn
+            round
+            flat
+            color="green"
+            class="item-destroy"
+            @click="restoreItem(item.id)"
             >Restore</v-btn
           >
         </v-list-tile-action>
@@ -41,6 +51,9 @@ export default {
     deleteItem(id) {
       this.$store.dispatch("deleteItem", id);
     },
+    restoreItem(id) {
+      this.$store.dispatch("restoreItem", id);
+    }
   }
 };
 </script>

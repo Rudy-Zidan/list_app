@@ -36,3 +36,15 @@ describe("removeItemInTrash", () => {
     expect(state).toEqual({ itemsInTrash: [] });
   });
 });
+
+describe("restoreItem", () => {
+  it("restore an item", () => {
+    const state = {
+      itemsInTrash: [itemInTrash]
+    };
+
+    mutations.restoreItem(state, itemInTrash);
+
+    expect(state).toEqual({ itemsInTrash: [] });
+  });
+});
