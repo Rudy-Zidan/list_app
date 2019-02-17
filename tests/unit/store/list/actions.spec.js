@@ -122,3 +122,63 @@ describe("restoreList", () => {
     expect(commit).toHaveBeenCalledWith("restoreList", list);
   });
 });
+
+describe("createList", () => {
+  beforeEach(() => {
+    mockAxios.post.mockImplementationOnce(() =>
+      Promise.resolve({ data: list })
+    );
+  });
+
+  it("create a list", async () => {
+    const commit = jest.fn();
+
+    await actions.createList({ commit }, list);
+
+    expect(mockAxios.post).toHaveBeenCalledTimes(1);
+    expect(commit).toHaveBeenCalledWith("setList", list);
+  });
+});
+
+describe("updateList", () => {
+  beforeEach(() => {
+    mockAxios.put.mockImplementationOnce(() => Promise.resolve({ data: list }));
+  });
+
+  it("update a list", async () => {
+    const commit = jest.fn();
+
+    await actions.updateList({ commit }, list);
+
+    expect(mockAxios.put).toHaveBeenCalledTimes(2);
+    expect(commit).toHaveBeenCalledWith("setList", list);
+  });
+});
+
+describe("deleteItem", () => {
+  const list = {
+    id: 1,
+    name: "test",
+    items: [
+      {
+        id: 1,
+        title: "test"
+      }
+    ]
+  };
+
+  beforeEach(() => {
+    mockAxios.delete.mockImplementationOnce(() =>
+      Promise.resolve({ data: list, status: 200 })
+    );
+  });
+
+  it("delete an item", async () => {
+    const commit = jest.fn();
+
+    await actions.deleteItem({ commit }, list.items[0].id);
+
+    expect(mockAxios.delete).toHaveBeenCalledTimes(4);
+    expect(commit).toHaveBeenCalledWith("removeItemFromList", list.items[0].id);
+  });
+});

@@ -3,7 +3,7 @@ import mutations from "@/store/modules/mutations/list";
 const list = {
   id: 1,
   name: "Test",
-  items: [
+  active_items: [
     {
       id: 1,
       title: "Test",
@@ -101,5 +101,65 @@ describe("restoreList", () => {
     mutations.restoreList(state, listsInTrash);
 
     expect(state).toEqual({ listsInTrash: [] });
+  });
+});
+
+describe("removeItemFromList", () => {
+  it("delete item from list", () => {
+    const state = {
+      lists: [list]
+    };
+
+    const item = {
+      id: 1,
+      name: "test",
+      list: {
+        id: 1
+      }
+    };
+
+    mutations.removeItemFromList(state, item);
+
+    expect(state.lists[0].items.length).toEqual(0);
+  });
+
+  it("update delete_at", () => {
+    const list = {
+      id: 1,
+      name: "Test",
+      items: [
+        {
+          id: 1,
+          title: "test"
+        }
+      ]
+    };
+    const state = {
+      list: list
+    };
+
+    list.items[0].delete_at = Date.now();
+
+    mutations.removeItemFromList(state, list);
+
+    expect(state).toEqual({ list: list });
+  });
+
+  it("delete item by id from list", () => {
+    const state = {
+      list: list
+    };
+
+    const item = {
+      id: 1,
+      name: "test",
+      list: {
+        id: 1
+      }
+    };
+
+    mutations.removeItemFromList(state, item.id);
+
+    expect(state.list.items.length).toEqual(0);
   });
 });

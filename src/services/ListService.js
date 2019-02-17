@@ -27,5 +27,8 @@ export default {
   },
   delete(id) {
     return Api().delete("/lists/" + id + "/delete/");
+  },
+  deleteItem(id) {
+    return Api().delete("/items/" + id + "/delete");
   }
 };

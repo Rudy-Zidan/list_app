@@ -25,11 +25,36 @@ export default {
     });
   },
   removeItemFromList(state, data) {
-    let index = state.lists.findIndex(list => list.id == data.list.id);
-    let items = state.lists[index].active_items;
+    if (!isNaN(data)) {
+      let items = state.list.items;
 
-    state.lists[index].active_items = items.filter(item => {
-      return item.id !== data.id;
-    });
+      state.list.items = items.filter(item => {
+        return item.id !== data;
+      });
+    } else if (state.list !== undefined && state.list.id !== undefined) {
+      let index = state.list.items.findIndex(item => item.id == data.id);
+      state.list.items[index].deleted_at = data.deleted_at;
+    } else {
+      let index = state.lists.findIndex(list => list.id == data.list.id);
+      let items = state.lists[index].active_items;
+
+      state.lists[index].active_items = items.filter(item => {
+        return item.id !== data.id;
+      });
+    }
+  },
+  setList(state, data) {
+    state.list = data;
+  },
+  clearList(state) {
+    state.list = {
+      name: "",
+      items: [
+        {
+          title: "",
+          description: ""
+        }
+      ]
+    };
   }
 };

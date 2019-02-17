@@ -1,4 +1,5 @@
 export default {
   getLists: state => state.lists,
-  getListsInTrash: state => state.listsInTrash
+  getListsInTrash: state => state.listsInTrash,
+  getList: state => state.list
 };

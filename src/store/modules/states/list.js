@@ -1,4 +1,13 @@
 export default {
   lists: [],
-  listsInTrash: []
+  listsInTrash: [],
+  list: {
+    name: "",
+    items: [
+      {
+        title: "",
+        descritpion: ""
+      }
+    ]
+  }
 };

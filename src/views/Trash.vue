@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import Lists from "@/components/trash/List";
 import Items from "@/components/trash/Item";
 

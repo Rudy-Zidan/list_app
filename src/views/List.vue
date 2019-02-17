@@ -1,6 +1,14 @@
 <template>
   <v-container fluid class="lists">
     <v-card>
+      <v-layout row>
+        <v-flex xs6></v-flex>
+        <v-flex xs6>
+          <v-btn round flat color="green" class="create-list" to="/lists"
+            >Create a list</v-btn
+          >
+        </v-flex>
+      </v-layout>
       <v-list subheader three-line v-for="(list, i) in lists" :key="i">
         <v-layout row>
           <v-flex xs6>
@@ -15,6 +23,7 @@
               @click="destroyList(list.id)"
               >Destroy</v-btn
             >
+            <v-btn round flat color="blue" class="create-list" :to="'/lists/' + list.id">Edit</v-btn>
           </v-flex>
         </v-layout>
 
@@ -65,7 +74,8 @@ export default {
 </script>
 
 <style>
-.item-destroy {
+.item-destroy,
+.create-list {
   float: right;
 }
 </style>
