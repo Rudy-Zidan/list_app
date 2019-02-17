@@ -11,6 +11,7 @@
         v-for="(link, index) in links"
         :to="link.url"
         :key="index"
+        :loading="$wait.is('loading ' + link.short)"
       >
         <span class="mr-2">{{ link.name }}</span>
       </v-btn>
@@ -27,7 +28,10 @@ export default {
   name: "App",
   data() {
     return {
-      links: [{ name: "Lists", url: "/" }, { name: "Trash", url: "/trash" }]
+      links: [
+        { name: "Lists", url: "/", short: "lists" },
+        { name: "Trash", url: "/trash", short: "trash lists" }
+      ]
     };
   }
 };

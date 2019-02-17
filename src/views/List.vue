@@ -21,6 +21,7 @@
               color="red"
               class="item-destroy"
               @click="destroyList(list.id)"
+              :loading="$wait.is('loading destroy list' + list.id)"
               >Destroy</v-btn
             >
             <v-btn
@@ -36,7 +37,12 @@
 
         <v-list-tile v-for="(item, j) in list.active_items" :key="j" @click="">
           <v-list-tile-action>
-            <v-btn round flat color="red" @click="destroyItem(item.id)"
+            <v-btn
+              round
+              flat
+              color="red"
+              @click="destroyItem(item.id)"
+              :loading="$wait.is('loading destroy item' + item.id)"
               >Destroy</v-btn
             >
           </v-list-tile-action>

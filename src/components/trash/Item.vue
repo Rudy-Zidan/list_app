@@ -9,6 +9,7 @@
             color="red"
             class="item-destroy"
             @click="deleteItem(item.id)"
+            :loading="$wait.is('loading delete item' + item.id)"
             >Delete</v-btn
           >
         </v-list-tile-action>
@@ -24,6 +25,7 @@
             color="green"
             class="item-destroy"
             @click="restoreItem(item.id)"
+            :loading="$wait.is('loading restore item' + item.id)"
             >Restore</v-btn
           >
         </v-list-tile-action>

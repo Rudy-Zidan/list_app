@@ -1,5 +1,5 @@
 import axios from "axios";
-import toast from "@/toast"
+import toast from "@/toast";
 
 export default () => {
   let instance = axios.create({
@@ -17,7 +17,7 @@ export default () => {
     },
     error => {
       if (error.response) {
-        if(error.response.data.status === 404) {
+        if (error.response.data.status === 404) {
           toast.error(error.response.data.error, "Requested List");
         } else {
           toast.error(

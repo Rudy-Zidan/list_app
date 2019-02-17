@@ -23,8 +23,9 @@ describe("fetchLists", () => {
 
   it("fetch lists", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.fetchLists({ commit });
+    await actions.fetchLists({ commit, dispatch });
 
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("setLists", [list]);
@@ -40,8 +41,9 @@ describe("fetchListsInTrash", () => {
 
   it("fetch lists in trash", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.fetchListsInTrash({ commit });
+    await actions.fetchListsInTrash({ commit, dispatch });
 
     expect(mockAxios.get).toHaveBeenCalledTimes(2);
     expect(commit).toHaveBeenCalledWith("setListsInTrash", [listInTrash]);
@@ -57,8 +59,9 @@ describe("destroyList", () => {
 
   it("destroy a list", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.destroyList({ commit }, list.id);
+    await actions.destroyList({ commit, dispatch }, list.id);
 
     expect(mockAxios.delete).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("removeList", list);
@@ -83,8 +86,9 @@ describe("destroyItemFromList", () => {
 
   it("destroy a an item inside a list", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.destroyItemFromList({ commit }, item.id);
+    await actions.destroyItemFromList({ commit, dispatch }, item.id);
 
     expect(mockAxios.delete).toHaveBeenCalledTimes(2);
     expect(commit).toHaveBeenCalledWith("removeItemFromList", list);
@@ -100,8 +104,9 @@ describe("deleteList", () => {
 
   it("delete a list", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.deleteList({ commit }, listInTrash.id);
+    await actions.deleteList({ commit, dispatch }, listInTrash.id);
 
     expect(mockAxios.delete).toHaveBeenCalledTimes(3);
     expect(commit).toHaveBeenCalledWith("removeListInTrash", listInTrash.id);
@@ -115,8 +120,9 @@ describe("restoreList", () => {
 
   it("restore a list", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.restoreList({ commit }, listInTrash.id);
+    await actions.restoreList({ commit, dispatch }, listInTrash.id);
 
     expect(mockAxios.put).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("restoreList", list);
@@ -132,8 +138,9 @@ describe("createList", () => {
 
   it("create a list", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.createList({ commit }, list);
+    await actions.createList({ commit, dispatch }, list);
 
     expect(mockAxios.post).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("setList", list);
@@ -147,8 +154,9 @@ describe("updateList", () => {
 
   it("update a list", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.updateList({ commit }, list);
+    await actions.updateList({ commit, dispatch }, list);
 
     expect(mockAxios.put).toHaveBeenCalledTimes(2);
     expect(commit).toHaveBeenCalledWith("setList", list);
@@ -175,8 +183,9 @@ describe("deleteItem", () => {
 
   it("delete an item", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.deleteItem({ commit }, list.items[0].id);
+    await actions.deleteItem({ commit, dispatch }, list.items[0].id);
 
     expect(mockAxios.delete).toHaveBeenCalledTimes(4);
     expect(commit).toHaveBeenCalledWith("removeItemFromList", list.items[0].id);

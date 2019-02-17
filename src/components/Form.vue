@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <v-form v-model="valid" ref="form">
+    <center v-if="$wait.is('loading list')">
+      <h1>Please wait...</h1>
+    </center>
+    <v-form v-model="valid" ref="form" v-else>
       <v-container>
         <v-text-field
           v-model="list.name"
@@ -42,6 +45,7 @@
                 class="item-destroy"
                 @click="deleteItem(item.id)"
                 v-else-if="item.deleted_at !== null"
+                :loading="$wait.is('loading delete item' + item.id)"
                 >Delete</v-btn
               >
               <v-btn
@@ -51,6 +55,7 @@
                 class="item-destroy"
                 @click="destroyItem(item.id)"
                 v-else-if="item.id !== undefined"
+                :loading="$wait.is('loading destroy item' + item.id)"
                 >Destroy</v-btn
               >
             </v-list-tile-action>
@@ -72,9 +77,14 @@
             </v-layout>
           </v-list-tile>
         </v-list>
-        <v-btn @click="submit" flat round color="green">{{
-          this.submitBtnName
-        }}</v-btn>
+        <v-btn
+          @click="submit"
+          flat
+          round
+          color="green"
+          :loading="$wait.is('loading save list')"
+          >{{ this.submitBtnName }}</v-btn
+        >
       </v-container>
     </v-form>
   </v-container>
@@ -126,8 +136,8 @@ export default {
     submit() {
       this.$refs.form.validate();
       if (this.valid && this.list.id !== undefined) {
-          this.update();
-      } else if(this.valid) {
+        this.update();
+      } else if (this.valid) {
         this.create();
       }
     },

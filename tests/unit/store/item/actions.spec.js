@@ -21,8 +21,9 @@ describe("fetchItemsInTrash", () => {
 
   it("fetch items in trash", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.fetchItemsInTrash({ commit });
+    await actions.fetchItemsInTrash({ commit, dispatch });
 
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("setItemsInTrash", [itemInTrash]);
@@ -38,8 +39,9 @@ describe("deleteItem", () => {
 
   it("delete an item", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.deleteItem({ commit }, itemInTrash.id);
+    await actions.deleteItem({ commit, dispatch }, itemInTrash.id);
 
     expect(mockAxios.delete).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("removeItemInTrash", itemInTrash.id);
@@ -55,8 +57,9 @@ describe("restoreItem", () => {
 
   it("restore an item", async () => {
     const commit = jest.fn();
+    const dispatch = jest.fn();
 
-    await actions.restoreItem({ commit }, itemInTrash.id);
+    await actions.restoreItem({ commit, dispatch }, itemInTrash.id);
 
     expect(mockAxios.put).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("restoreItem", itemInTrash);
