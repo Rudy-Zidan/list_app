@@ -7,11 +7,18 @@
             <v-subheader large>{{ list.name }} </v-subheader>
           </v-flex>
           <v-flex xs6>
-            <v-btn round flat color="red" class="item-destroy">Destroy</v-btn>
+            <v-btn
+              round
+              flat
+              color="red"
+              class="item-destroy"
+              @click="destroyList(list.id)"
+              >Destroy</v-btn
+            >
           </v-flex>
         </v-layout>
 
-        <v-list-tile @click="" v-for="(item, j) in list.items" :key="j">
+        <v-list-tile v-for="(item, j) in list.items" :key="j">
           <v-list-tile-action>
             <v-btn round flat color="red">Destroy</v-btn>
           </v-list-tile-action>
@@ -44,6 +51,9 @@ export default {
   methods: {
     fetchLists() {
       this.$store.dispatch("fetchLists");
+    },
+    destroyList(id) {
+      this.$store.dispatch("destroyList", id);
     }
   }
 };
