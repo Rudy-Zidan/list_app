@@ -91,3 +91,15 @@ describe("removeListInTrash", () => {
     expect(state).toEqual({ listsInTrash: [] });
   });
 });
+
+describe("restoreList", () => {
+  it("restore a list", () => {
+    const state = {
+      listsInTrash: [listsInTrash]
+    };
+
+    mutations.restoreList(state, listsInTrash);
+
+    expect(state).toEqual({ listsInTrash: [] });
+  });
+});

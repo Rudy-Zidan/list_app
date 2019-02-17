@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-list>
+    <v-list v-if="lists.length > 0">
       <v-list-tile v-for="list in lists" :key="list.id" @click="">
         <v-list-tile-action>
           <v-btn
@@ -22,12 +22,13 @@
             flat
             color="green"
             class="item-destroy"
-            @click="destroyList(list.id)"
+            @click="restoreList(list.id)"
             >Restore</v-btn
           >
         </v-list-tile-action>
       </v-list-tile>
     </v-list>
+    <p v-else class="pa-5">No destroyed lists</p>
   </v-card>
 </template>
 
@@ -48,6 +49,9 @@ export default {
     },
     deleteList(id) {
       this.$store.dispatch("deleteList", id);
+    },
+    restoreList(id) {
+      this.$store.dispatch("restoreList", id);
     }
   }
 };

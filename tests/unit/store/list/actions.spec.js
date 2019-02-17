@@ -111,3 +111,18 @@ describe("deleteList", () => {
     expect(commit).toHaveBeenCalledWith("removeListInTrash", listInTrash.id);
   });
 });
+
+describe("restoreList", () => {
+  beforeEach(() => {
+    mockAxios.put.mockImplementationOnce(() => Promise.resolve({ data: list }));
+  });
+
+  it("restore a list", async () => {
+    const commit = jest.fn();
+
+    await actions.restoreList({ commit }, listInTrash.id);
+
+    expect(mockAxios.delete).toHaveBeenCalledTimes(2);
+    expect(commit).toHaveBeenCalledWith("restoreList", list);
+  });
+});
