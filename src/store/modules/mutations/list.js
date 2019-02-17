@@ -17,11 +17,19 @@ export default {
   },
   updateListItems(state, data) {
     let index = state.lists.findIndex(list => list.id == data.id);
-    state.lists[index].items = data.items;
+    state.lists[index].active_items = data.items;
   },
   removeListInTrash(state, id) {
     state.listsInTrash = state.listsInTrash.filter(list => {
       return list.id !== id;
+    });
+  },
+  removeItemFromList(state, data) {
+    let index = state.lists.findIndex(list => list.id == data.list.id);
+    let items = state.lists[index].active_items;
+
+    state.lists[index].active_items = items.filter(item => {
+      return item.id !== data.id;
     });
   }
 };

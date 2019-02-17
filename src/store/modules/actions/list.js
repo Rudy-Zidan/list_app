@@ -32,5 +32,10 @@ export default {
         commit("removeListInTrash", id);
       }
     });
+  },
+  async destroyItemFromList({ commit }, id) {
+    ListService.destroyItem(id).then(res => {
+      commit("removeItemFromList", res.data);
+    });
   }
 };

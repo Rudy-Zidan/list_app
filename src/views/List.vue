@@ -18,9 +18,9 @@
           </v-flex>
         </v-layout>
 
-        <v-list-tile v-for="(item, j) in list.items" :key="j" @click="">
+        <v-list-tile v-for="(item, j) in list.active_items" :key="j" @click="">
           <v-list-tile-action>
-            <v-btn round flat color="red" @click="destroyItem(list.id, item.id)"
+            <v-btn round flat color="red" @click="destroyItem(item.id)"
               >Destroy</v-btn
             >
           </v-list-tile-action>
@@ -57,8 +57,8 @@ export default {
     destroyList(id) {
       this.$store.dispatch("destroyList", id);
     },
-    destroyItem(id, itemId) {
-      this.$store.dispatch("destroyItem", { id: id, itemId: itemId });
+    destroyItem(id) {
+      this.$store.dispatch("destroyItemFromList", id);
     }
   }
 };

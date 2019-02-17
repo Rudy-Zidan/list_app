@@ -65,33 +65,29 @@ describe("destroyList", () => {
   });
 });
 
-describe("destroyItem", () => {
-  const savedlist = {
+describe("destroyItemFromList", () => {
+  const item = {
     id: 1,
-    name: "test",
-    items: [
-      {
-        id: 1,
-        title: "test"
-      }
-    ]
+    title: "test",
+    list: {
+      id: 1,
+      name: "test"
+    }
   };
 
   beforeEach(() => {
-    mockAxios.put.mockImplementationOnce(() => Promise.resolve({ data: list }));
+    mockAxios.delete.mockImplementationOnce(() =>
+      Promise.resolve({ data: list })
+    );
   });
 
   it("destroy a an item inside a list", async () => {
     const commit = jest.fn();
-    const params = {
-      id: savedlist.id,
-      listId: savedlist.items[0].id
-    };
 
-    await actions.destroyItem({ commit }, params);
+    await actions.destroyItemFromList({ commit }, item.id);
 
-    expect(mockAxios.put).toHaveBeenCalledTimes(1);
-    expect(commit).toHaveBeenCalledWith("updateListItems", list);
+    expect(mockAxios.delete).toHaveBeenCalledTimes(2);
+    expect(commit).toHaveBeenCalledWith("removeItemFromList", list);
   });
 });
 
@@ -107,7 +103,7 @@ describe("deleteList", () => {
 
     await actions.deleteList({ commit }, listInTrash.id);
 
-    expect(mockAxios.delete).toHaveBeenCalledTimes(2);
+    expect(mockAxios.delete).toHaveBeenCalledTimes(3);
     expect(commit).toHaveBeenCalledWith("removeListInTrash", listInTrash.id);
   });
 });
@@ -122,7 +118,7 @@ describe("restoreList", () => {
 
     await actions.restoreList({ commit }, listInTrash.id);
 
-    expect(mockAxios.delete).toHaveBeenCalledTimes(2);
+    expect(mockAxios.put).toHaveBeenCalledTimes(1);
     expect(commit).toHaveBeenCalledWith("restoreList", list);
   });
 });
