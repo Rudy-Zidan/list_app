@@ -18,5 +18,10 @@ export default {
   updateListItems(state, data) {
     let index = state.lists.findIndex(list => list.id == data.id);
     state.lists[index].items = data.items;
+  },
+  removeListInTrash(state, data) {
+    state.listsInTrash = state.listsInTrash.filter(list => {
+      return list.id !== data.id;
+    });
   }
 };

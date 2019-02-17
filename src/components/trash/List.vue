@@ -8,7 +8,7 @@
             flat
             color="red"
             class="item-destroy"
-            @click="destroyList(list.id)"
+            @click="deleteList(list.id)"
             >Delete</v-btn
           >
         </v-list-tile-action>
@@ -45,6 +45,9 @@ export default {
   methods: {
     fetchListsInTrash() {
       this.$store.dispatch("fetchListsInTrash");
+    },
+    deleteList() {
+      this.$store.dispatch("deleteList");
     }
   }
 };

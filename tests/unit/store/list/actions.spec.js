@@ -94,3 +94,20 @@ describe("destroyItem", () => {
     expect(commit).toHaveBeenCalledWith("updateListItems", list);
   });
 });
+
+describe("deleteList", () => {
+  beforeEach(() => {
+    mockAxios.delete.mockImplementationOnce(() =>
+      Promise.resolve({ data: listInTrash })
+    );
+  });
+
+  it("delete a list", async () => {
+    const commit = jest.fn();
+
+    await actions.deleteList({ commit }, listInTrash.id);
+
+    expect(mockAxios.delete).toHaveBeenCalledTimes(2);
+    expect(commit).toHaveBeenCalledWith("removeListInTrash", listInTrash);
+  });
+});

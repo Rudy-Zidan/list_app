@@ -54,7 +54,7 @@ describe("setListsInTrash", () => {
 });
 
 describe("removeList", () => {
-  it("adds a list to the state", () => {
+  it("remove a list", () => {
     const state = {
       lists: [list]
     };
@@ -77,5 +77,17 @@ describe("updateListItems", () => {
     mutations.updateListItems(state, list);
 
     expect(state).toEqual({ lists: [listUpdated] });
+  });
+});
+
+describe("removeListInTrash", () => {
+  it("remove a list", () => {
+    const state = {
+      listsInTrash: [listsInTrash]
+    };
+
+    mutations.removeListInTrash(state, listsInTrash);
+
+    expect(state).toEqual({ listsInTrash: [] });
   });
 });

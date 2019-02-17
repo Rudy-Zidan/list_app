@@ -25,5 +25,10 @@ export default {
     ListService.destroyItem(params.id, params.itemId).then(res => {
       commit("updateListItems", res.data);
     });
+  },
+  async deleteList({ commit }, id) {
+    ListService.delete(id).then(res => {
+      commit("removeListInTrash", res.data);
+    });
   }
 };
