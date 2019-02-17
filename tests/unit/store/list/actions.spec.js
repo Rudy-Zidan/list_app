@@ -23,3 +23,20 @@ describe("fetchLists", () => {
     expect(commit).toHaveBeenCalledWith("setLists", [list]);
   });
 });
+
+describe("destroyLists", () => {
+  beforeEach(() => {
+    mockAxios.delete.mockImplementationOnce(() =>
+      Promise.resolve({ data: list })
+    );
+  });
+
+  it("fetch lists", async () => {
+    const commit = jest.fn();
+
+    await actions.destroyList({ commit }, list.id);
+
+    expect(mockAxios.delete).toHaveBeenCalledTimes(1);
+    expect(commit).toHaveBeenCalledWith("removeList", list);
+  });
+});

@@ -1,20 +1,19 @@
 import mutations from "@/store/modules/mutations/list";
 
-// destructure assign `mutations`
+const list = {
+  id: 1,
+  name: "Test",
+  items: [
+    {
+      id: 1,
+      title: "Test",
+      description: "This is a test"
+    }
+  ]
+};
+
 describe("setLists", () => {
   it("adds a list to the state", () => {
-    const list = {
-      id: 1,
-      name: "Test",
-      items: [
-        {
-          id: 1,
-          title: "Test",
-          description: "This is a test"
-        }
-      ]
-    };
-
     const state = {
       lists: []
     };
@@ -24,5 +23,17 @@ describe("setLists", () => {
     expect(state).toEqual({
       lists: { list: list }
     });
+  });
+});
+
+describe("removeList", () => {
+  it("adds a list to the state", () => {
+    const state = {
+      lists: [list]
+    };
+
+    mutations.removeList(state, list);
+
+    expect(state).toEqual({ lists: [] });
   });
 });

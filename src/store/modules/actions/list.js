@@ -5,5 +5,10 @@ export default {
     ListService.all().then(res => {
       commit("setLists", res.data);
     });
+  },
+  async destroyList({ commit }, id) {
+    ListService.destroy(id).then(res => {
+      commit("removeList", res.data);
+    });
   }
 };
