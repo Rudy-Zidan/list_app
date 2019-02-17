@@ -42,7 +42,8 @@
                 class="item-destroy"
                 @click="deleteItem(item.id)"
                 v-else-if="item.deleted_at !== null"
-                >Delete</v-btn>
+                >Delete</v-btn
+              >
               <v-btn
                 round
                 flat
@@ -53,25 +54,27 @@
                 >Destroy</v-btn
               >
             </v-list-tile-action>
-              <v-layout row class="ml-2">
-                <v-flex lg6>
-                  <v-text-field
-                    v-model="item.title"
-                    :rules="titleRules"
-                    label="Title"
-                    required
-                  ></v-text-field>
-                </v-flex>
-                <v-flex lg6>
-                  <v-text-field
-                    v-model="item.description"
-                    label="Description"
-                  ></v-text-field>
-                </v-flex>
-              </v-layout>
+            <v-layout row class="ml-2">
+              <v-flex lg6>
+                <v-text-field
+                  v-model="item.title"
+                  :rules="titleRules"
+                  label="Title"
+                  required
+                ></v-text-field>
+              </v-flex>
+              <v-flex lg6>
+                <v-text-field
+                  v-model="item.description"
+                  label="Description"
+                ></v-text-field>
+              </v-flex>
+            </v-layout>
           </v-list-tile>
         </v-list>
-        <v-btn @click="submit" flat round color="green">{{this.submitBtnName}}</v-btn>
+        <v-btn @click="submit" flat round color="green">{{
+          this.submitBtnName
+        }}</v-btn>
       </v-container>
     </v-form>
   </v-container>
@@ -86,12 +89,8 @@ export default {
     return {
       valid: false,
       submitBtnName: "",
-      nameRules: [
-        v => !!v || "Name is required"
-      ],
-      titleRules: [
-        v => !!v || "Title is required"
-      ]
+      nameRules: [v => !!v || "Name is required"],
+      titleRules: [v => !!v || "Title is required"]
     };
   },
   computed: mapGetters({
@@ -99,8 +98,8 @@ export default {
   }),
   watch: {
     list: function(value, old) {
-      if(this.$route.params.id === undefined) {
-        this.redirectToList(value);
+      if (this.$route.params.id === undefined) {
+        this.redirectToList();
       }
     }
   },
@@ -126,9 +125,9 @@ export default {
     },
     submit() {
       this.$refs.form.validate();
-      if(this.list.id !== undefined) {
-        this.update();
-      } else {
+      if (this.valid && this.list.id !== undefined) {
+          this.update();
+      } else if(this.valid) {
         this.create();
       }
     },
@@ -147,7 +146,7 @@ export default {
     loadList() {
       this.$store.dispatch("fetchList", this.$route.params.id);
     },
-    redirectToList(data) {
+    redirectToList() {
       this.$router.push("/");
     }
   }

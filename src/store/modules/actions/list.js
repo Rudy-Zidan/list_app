@@ -55,8 +55,6 @@ export default {
   async updateList({ commit }, params) {
     params.items_attributes = params.items;
     const id = params.id;
-    delete params.items;
-    delete params.id;
 
     ListService.update(id, params).then(res => {
       commit("setList", res.data);

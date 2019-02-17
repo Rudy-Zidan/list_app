@@ -23,7 +23,14 @@
               @click="destroyList(list.id)"
               >Destroy</v-btn
             >
-            <v-btn round flat color="blue" class="create-list" :to="'/lists/' + list.id">Edit</v-btn>
+            <v-btn
+              round
+              flat
+              color="blue"
+              class="create-list"
+              :to="'/lists/' + list.id"
+              >Edit</v-btn
+            >
           </v-flex>
         </v-layout>
 
