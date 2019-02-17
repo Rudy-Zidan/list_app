@@ -1,7 +1,33 @@
 <template>
-  <div class="lists">
-    <h1>This is Lists page</h1>
-  </div>
+  <v-container fluid class="lists">
+    <v-card>
+      <v-list subheader three-line v-for="(list, i) in lists" :key="i">
+        <v-layout row>
+          <v-flex xs6>
+            <v-subheader large>{{ list.name }} </v-subheader>
+          </v-flex>
+          <v-flex xs6>
+            <v-btn round flat color="red" class="item-destroy">Destroy</v-btn>
+          </v-flex>
+        </v-layout>
+
+        <v-list-tile @click="" v-for="(item, j) in list.items" :key="j">
+          <v-list-tile-action>
+            <v-btn round flat color="red">Destroy</v-btn>
+          </v-list-tile-action>
+          <v-list-tile-content class="ml-2">
+            <v-list-tile-title>
+              {{ item.title }}
+            </v-list-tile-title>
+            <v-list-tile-sub-title>
+              {{ item.description }}
+            </v-list-tile-sub-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-divider></v-divider>
+      </v-list>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -22,3 +48,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.item-destroy {
+  float: right;
+}
+</style>

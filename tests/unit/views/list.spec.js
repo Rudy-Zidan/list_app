@@ -1,9 +1,11 @@
+import Vue from "vue";
 import Vuex from "vuex";
-import { shallowMount, createLocalVue } from "@vue/test-utils";
+import Vuetify from "vuetify";
+import { shallowMount } from "@vue/test-utils";
 import List from "@/views/List.vue";
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
+Vue.use(Vuex);
+Vue.use(Vuetify);
 
 const list = {
   id: 1,
@@ -35,12 +37,8 @@ const store = new Vuex.Store({
 
 describe("List.vue", () => {
   it("render component", () => {
-    const wrapper = shallowMount(List, {
-      store,
-      localVue
-    });
+    const wrapper = shallowMount(List, { store });
 
-    expect(wrapper.find("h1").text()).toBe("This is Lists page");
     expect(wrapper.vm.lists.length).toBe(1);
   });
 });
